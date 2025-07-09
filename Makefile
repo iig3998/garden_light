@@ -31,7 +31,9 @@ SRCS = main.c \
        lib/adc/adc.c \
        lib/gpio/gpio.c \
        lib/modbus/modbus.c \
-       lib/timer/timer.c \
+       lib/timer/timer0.c \
+       lib/timer/timer1.c \
+       lib/timer/timer2.c \
        lib/uart/uart.c
 
 # Object files
