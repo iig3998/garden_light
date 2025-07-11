@@ -17,7 +17,7 @@ AVRDUDE = avrdude
 AVRDUDE_FLAGS = -p $(MCU) -c $(PROGRAMMER)
 
 # Compiler options
-CFLAGS = -Wall -Os -DF_CPU=$(F_CPU)UL -mmcu=$(MCU) \
+CFLAGS = -Wall -Os -DF_CPU=$(F_CPU)UL -mmcu=$(MCU) -D_FORTIFY_SOURCE=1 \
          -Ilib/adc \
          -Ilib/gpio \
          -Ilib/modbus \
