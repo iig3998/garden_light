@@ -7,6 +7,7 @@
  | Address slave (1 byte) | Functional code (1 byte) | Data (N byte) | CRC16 (2 byte) |
 */
 
+/* Calc crc16 modbus message */
 static uint16_t calc_crc16_msg(uint8_t *data, uint32_t length) {
 
     uint16_t crc = 0xFFFF;
@@ -26,6 +27,7 @@ static uint16_t calc_crc16_msg(uint8_t *data, uint32_t length) {
     return crc;
 }
 
+/* Write 16bit in big endian */
 static void write_uint16_be(uint8_t *buf, uint16_t val) {
 
     buf[0] = (val >> 8) & 0xFF;
