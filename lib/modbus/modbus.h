@@ -1,6 +1,8 @@
 #ifndef MODBUS_H
 #define MODBUS_H
 
+#pragma once
+
 #include <stdint.h>
 
 /* Address register */
