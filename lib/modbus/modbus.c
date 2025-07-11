@@ -36,6 +36,12 @@ static void write_uint16_be(uint8_t *buf, uint16_t val) {
     return;
 }
 
+/* Read 16 bit in big endian */
+static uint16_t read_uint16_be(const uint8_t *buf, uint8_t offset) {
+
+    return ((uint16_t)buf[offset] << 8) | buf[offset + 1];
+}
+
 /* Read coil register */
 uint8_t *build_read_coil_register(uint8_t address, uint16_t start_coil_registers, uint16_t num_coil_registers) {
 
