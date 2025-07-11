@@ -61,3 +61,28 @@ uint8_t *build_read_coil_register(uint8_t address, uint16_t start_coil_registers
 
     return msg;
 }
+
+/* Write coil register */
+static void write_coil_register(uint8_t *coil_register, uint8_t value) {
+
+    *coil_register = value;
+
+    return;
+}
+
+/* Parse modbus command */
+void parse_modbus_cmd(uint8_t msg[], uint8_t address) {
+
+    if(msg[0] == address) {
+        switch(msg[1]) {
+            case READ_COIL_STATUS_REGISTER:
+
+            break;
+            case WRITE_SINGLE_COIL:
+
+            break;
+        }
+    }
+
+    return;
+}
