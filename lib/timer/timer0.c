@@ -1,0 +1,1 @@
+// Il protocollo richiede ~304 µs di silenzio tra due messaggi consecutivi.
