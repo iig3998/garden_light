@@ -5,11 +5,15 @@
 
 #include <stdint.h>
 
+#define MAJOR_MODBUS_VER 0
+#define MINOR_MODBUS_VER 1
+#define PATCH_MODBUS_VER 0
+
 /* Address register */
-#define COIL_REGISTER           0x0001
-#define DISCRETE_INPUT_REGISTER	0x1001
-#define INPUT_REGISTER	        0x3001
-#define HOLDING_REGISTER        0x4001
+#define COIL_REGISTER                0x0001
+#define DISCRETE_INPUT_REGISTER	     0x1001
+#define INPUT_REGISTER	             0x3001
+#define HOLDING_REGISTER             0x4001
 
 /* Functional code */
 #define READ_COIL_STATUS_REGISTER    0x01
