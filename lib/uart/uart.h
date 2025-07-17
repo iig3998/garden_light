@@ -5,6 +5,10 @@
 
 #include <stdint.h>
 
+#define MAJOR_UART_VER 0
+#define MINOR_UART_VER 1
+#define PATCH_UART_VER 0
+
 #define UART_BAUDRATE_1200   1200
 #define UART_BAUDRATE_2400   2400
 #define UART_BAUDRATE_4800   4800
