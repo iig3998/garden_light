@@ -56,6 +56,22 @@ ISR(USART_RX_vect) {
     static idx_count = 0;
 
     modbus_msg[idx_count++] = UDR0;
+/* Manage coil register */
+void mgmt_coil_register(uint8_t *modbus_msg) {
+
+    if ((((modbus_msg[4] << 8) | modbus_msg[5]) >= ADDRESS_COIL_REGISTER_0) && (((modbus_msg[4] << 8) | modbus_msg[5]) <= ADDRESS_COIL_REGISTER_3)) {
+
+        switch (((modbus_msg[2] << 8) | modbus_msg[3])) {
+            case COIL_ON:
+                set_gpio_high_level(&PORTC, (modbus_msg[4] << 8) | modbus_msg[5]);
+            break;
+            case COIL_OFF:
+                set_gpio_low_level(&PORTC, (modbus_msg[4] << 8) | modbus_msg[5]);
+            break;
+            default:
+            break;
+        }
+    }
 
     return;
 }
