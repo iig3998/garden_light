@@ -27,7 +27,7 @@ static uint16_t calc_crc16_msg(uint8_t *data, uint32_t length) {
     return crc;
 }
 
-/* Write 16bit in big endian */
+/* Write 16 bit in big endian */
 static void write_uint16_be(uint8_t *buf, uint16_t val) {
 
     buf[0] = (val >> 8) & 0xFF;
