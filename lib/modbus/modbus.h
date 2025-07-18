@@ -42,4 +42,6 @@
 
 uint8_t *build_read_coil_register(uint8_t address, uint16_t start_coil_registers, uint16_t num_coil_registers);
 
+uint16_t calc_crc16_msg(uint8_t *data, uint32_t length);
+
 #endif

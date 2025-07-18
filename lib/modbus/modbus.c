@@ -8,7 +8,7 @@
 */
 
 /* Calc crc16 modbus message */
-static uint16_t calc_crc16_msg(uint8_t *data, uint32_t length) {
+uint16_t calc_crc16_msg(uint8_t *data, uint32_t length) {
 
     uint16_t crc = 0xFFFF;
 
@@ -17,7 +17,7 @@ static uint16_t calc_crc16_msg(uint8_t *data, uint32_t length) {
         crc ^= (uint16_t)data[i];
         for (uint8_t bit = 0; bit < 8; bit++)  {
             if (crc & 0x0001) {
-                crc = (crc >> 1) ^ 0x8005;
+                crc = (crc >> 1) ^ 0xA001;
             } else {
                 crc >>= 1;
             }
