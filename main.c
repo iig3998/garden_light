@@ -7,6 +7,7 @@
 
 #include "gpio.h"
 #include "uart.h"
+#include "modbus.h"
 
 #define SIZE_MODBUS_MESSAGE 10
 
