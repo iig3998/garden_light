@@ -6,7 +6,7 @@
 #define OUTPUT_A 0
 #define OUTPUT_B 1
 
-void timer0_init(uint8_t mode, uint8_t output, uint8_t prescaler);
+void timer0_init(uint8_t mode, uint8_t output, uint16_t prescaler);
 
 void timer0_set_counter(uint8_t counter);
 

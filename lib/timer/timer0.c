@@ -18,7 +18,7 @@
 #define TIMER0_FAST_PWM_TOP_MODE      0x07
 
 /* Init timer 0 */
-void timer0_init(uint8_t mode, uint8_t output, uint8_t prescaler) {
+void timer0_init(uint8_t mode, uint8_t output, uint16_t prescaler) {
 
     /* Clear timer register */
     TCCR0A = 0x00;
