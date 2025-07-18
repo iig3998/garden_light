@@ -11,7 +11,6 @@
 
 #define SIZE_MODBUS_MESSAGE 10
 
-static uint8_t coil_register = 0x00;
 static bool world_ready = false;
 static uint8_t modbus_msg[SIZE_MODBUS_MESSAGE] = {0x00};
 
