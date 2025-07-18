@@ -13,7 +13,7 @@
 #define TIMER0_CTC_MODE               0x02
 #define TIMER0_FAST_PWM_MODE          0x03
 #define TIMER0_RESERVED_MODE          0x04 /* Not used */
-#define TIMER0_CTC_MODE               0x05
+#define TIMER0_               0x05
 #define TIMER0_PWM_PHASE_CORRECT_MODE 0x06
 #define TIMER0_FAST_PWM_TOP_MODE      0x07
 
