@@ -12,6 +12,12 @@ PROGRAMMER = usbasp
 # Clock frequency
 F_CPU = 16000000
 
+# UART configuration
+WORD_LENGHT = 8
+BIT_STOP = 1
+BIT_PARITY = 0
+BAUDRATE = 115200
+
 # AVRDUDE options
 AVRDUDE = avrdude
 AVRDUDE_FLAGS = -p $(MCU) -c $(PROGRAMMER)
