@@ -59,11 +59,17 @@ ISR(USART_RX_vect) {
 }
 
 /* Interrupt service routine TIMER1*/
-ISR(TIMER1_OVF_vect) {
+ISR(TIMER1_COMPA_vect) {
+
+    cli();
 
     world_ready = true;
 
     /* Stop and clear timer */
+    timer1_stop();
+    timer1_reset_counter();
+
+    sei();
 
     return;
 }
