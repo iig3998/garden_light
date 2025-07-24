@@ -143,7 +143,7 @@ int main() {
     set_gpio_low_level(&PORTC, PINC0);
 
     /* Init uart */
-    init_uart(UART_BAUDRATE_115200, UART_2_BIT_STOP, UART_8_WORD_LENGTH, UART_PARITY_NONE);
+    init_uart(UART_2_BIT_STOP, UART_PARITY_NONE, UART_8_WORD_LENGTH);
 
     /* Enable rx */
     rs485_enable_rx();
