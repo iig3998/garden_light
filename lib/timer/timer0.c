@@ -17,6 +17,8 @@
 #define TIMER0_PWM_PHASE_CORRECT_MODE 0x06
 #define TIMER0_FAST_PWM_TOP_MODE      0x07
 
+//  usato per gestire il tempo, e cioe' le funzioni delay(), millis()
+
 /* Init timer 0 */
 void timer0_init(uint8_t mode, uint8_t output, uint16_t prescaler) {
 
@@ -41,6 +43,8 @@ void timer0_init(uint8_t mode, uint8_t output, uint16_t prescaler) {
             DDRD |= (1 << PD6);
             TCCR0A = (1 << WGM00);
             TCCR0A |= (1 << COM0A1);
+        break;
+        default:
         break;
     }
 
@@ -74,6 +78,46 @@ void timer0_init(uint8_t mode, uint8_t output, uint16_t prescaler) {
 void timer0_set_counter(uint8_t counter) {
 
     TCNT0 = counter;
+
+    return;
+}
+
+/* Reset timer */
+void timer0_reset_counter() {
+
+    TCNT0 = 0;
+
+    return;
+}
+
+/* Start timer */
+void timer0_start(uint16_t prescaler) {
+
+    switch(prescaler) {
+        case 1:
+            TCCR0B |= (1 << CS00); /* f_timer = 16 MHz */
+        break;
+        case 8:
+            TCCR0B |= (1 << CS01); /* f_timer = 2 MHz */
+        break;
+        case 64:
+            TCCR0B |= (1 << CS01) | (1 << CS00); /* f_timer = 250 kHz */
+        break;
+        case 256:
+            TCCR0B |= (1 << CS02); /* f_timer = 62.5 kHz */
+        break;
+        case 1024:
+            TCCR0B |= (1 << CS02) | (1 << CS00); /* f_timer = 15.625 kHz */
+        break;
+    }
+
+    return;
+}
+
+/* Stop timer */
+void timer0_stop() {
+
+    TCCR0B &= 0xF8;
 
     return;
 }
