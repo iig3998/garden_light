@@ -168,7 +168,7 @@ int main() {
         if(world_ready) {
 
             /* Valid only coil registers */
-            crc16 = (modbus_msg[7] << 8)| modbus_msg[6];
+            crc16 = (uint16_t)((modbus_msg[7] << 8)| modbus_msg[6]);
             if ((modbus_msg[0] == address_slave) && (modbus_msg[1] == WRITE_SINGLE_COIL) && (crc16 == calc_crc16_msg(modbus_msg, idx_count - 1 - 2))) {
                 mgmt_coil_register(modbus_msg);
                 idx_count = 0;
