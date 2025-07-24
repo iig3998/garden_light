@@ -100,6 +100,20 @@ void mgmt_coil_register(uint8_t *modbus_msg) {
     return;
 }
 
+/* Get modbus timeout */
+static uint16_t get_timeout_modbus() {
+
+    float timeout = (1 / (float)BAUDRATE ) * (WORD_LENGHT + 1 + BIT_PARITY + BIT_STOP) * 3.5;
+    float t_clock = 1 / (float)F_CPU;
+
+    printf("Timeout: %f\r\n", timeout);
+    printf("T clock: %f\r\n", t_clock);
+
+    printf("%u\r\n", (uint16_t)(timeout/t_clock));
+
+    return (uint16_t)(timeout/t_clock);
+}
+
 /* Main program */
 int main() {
 
