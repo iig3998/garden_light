@@ -18,11 +18,15 @@ AVRDUDE_FLAGS = -p $(MCU) -c $(PROGRAMMER)
 
 # Compiler options
 CFLAGS = -Wall -Os -DF_CPU=$(F_CPU)UL -mmcu=$(MCU) -D_FORTIFY_SOURCE=1 \
-         -Ilib/adc \
-         -Ilib/gpio \
-         -Ilib/modbus \
-         -Ilib/timer \
-         -Ilib/uart
+       -DBAUDRATE=$(BAUDRATE) \
+       -DWORD_LENGHT=$(WORD_LENGHT) \
+       -DBIT_STOP=$(BIT_STOP) \
+       -DBIT_PARITY=$(BIT_PARITY) \
+       -Ilib/adc \
+       -Ilib/gpio \
+       -Ilib/modbus \
+       -Ilib/timer \
+       -Ilib/uart
 
 LDFLAGS = -mmcu=$(MCU)
 
