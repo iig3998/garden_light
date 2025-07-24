@@ -15,7 +15,7 @@
 #define UART_BAUDRATE_9600   9600
 #define UART_BAUDRATE_19200  19200
 #define UART_BAUDRATE_38400  38400
-#define UART_BAUDRATE_57600  57600 // Baudrate time 8.68 µs
+#define UART_BAUDRATE_57600  57600
 #define UART_BAUDRATE_115200 115200
 
 #define UART_PARITY_EVEN 0
@@ -30,7 +30,7 @@
 #define UART_7_WORD_LENGTH 7
 #define UART_8_WORD_LENGTH 8
 
-void init_uart(uint32_t baudrate, uint8_t stop_bits, uint8_t data_bits, uint8_t parity);
+void init_uart(uint8_t stop_bits, uint8_t parity, uint8_t data_bits);
 
 void send_char_uart(char data);
 

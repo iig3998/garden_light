@@ -1,49 +1,81 @@
-#include "uart.h"
 #include <avr/io.h>
 
-void init_uart(uint32_t baudrate, uint8_t stop_bits, uint8_t data_bits, uint8_t parity) {
+#include "uart.h"
 
-    uint16_t ubrr = (F_CPU / (16UL * baudrate)) - 1;
+/* Set asynchronous usart mode */
+void set_asynchronous_usart_mode() {
+
+    UCSR0C &= ~((1 << UMSEL01) | (1 << UMSEL00));
+
+    return;
+}
+
+/* Set synchronous usart mode */
+void set_synchronous_usart_mode() {
+
+    UCSR0C |= (1 << UMSEL00);
+
+    return;
+}
+
+/* Init uart */
+void init_uart(uint8_t stop_bits, uint8_t parity, uint8_t data_bits) {
+
+    uint16_t ubrr = (F_CPU / (16UL * BAUDRATE)) - 1;
     uint8_t ucsrc = 0;
 
-    UBRR0H = (uint8_t)(ubrr >> 8);
-    UBRR0L = (uint8_t)(ubrr);
+    UBRR0H = (uint8_t)((ubrr >> 8) & 0x0F);
+    UBRR0L = (uint8_t)((ubrr) & 0xFF);
 
     /* Enable RX and TX */
     UCSR0B = (1 << RXEN0) | (1 << TXEN0);
 
     /* Set stop bit */
-    if (stop_bits == 2)
-        ucsrc |= (1 << USBS0);  // 2 stop bit
-    else
-        ucsrc &= ~(1 << USBS0); // 1 stop bit (default)
+    switch(stop_bits) {
+        case 2:
+            /* 2 stop bits */
+            ucsrc |= (1 << USBS0);
+        break;
+        case 1:
+            /* 1 stop bit */
+            ucsrc &= ~(1 << USBS0);
+        break;
+    }
 
     /* Set length world */
-    switch (data_bits) {
-        case 5: 
+    switch(data_bits) {
+        case UART_5_WORD_LENGTH:
+            ucsrc &= ~((1 << UCSZ00) | (1 << UCSZ01) | (1 << UCSZ00));
         break;
-        case 6: 
+        case UART_6_WORD_LENGTH:
             ucsrc |= (1 << UCSZ00); 
         break;
-        case 7: 
+        case UART_7_WORD_LENGTH:
             ucsrc |= (1 << UCSZ01);
         break;
-        case 8: 
+        case UART_8_WORD_LENGTH:
             ucsrc |= (1 << UCSZ01) | (1 << UCSZ00); 
         break;
-        default: 
+        default:
         break;
     }
 
     /* Parity bit */
     switch (parity) {
-        case 0: 
+        case 0:
+            /* Disable parity bits */
+            ucsrc &= ~((1 << UPM01) | (1 << UPM00));
         break;
-        case 1: ucsrc |= (1 << UPM01) | (1 << UPM00);
+        case 1:
+            /* Even parity */
+            ucsrc |= (1 << UPM01) | (1 << UPM00);
         break;
-        case 2: ucsrc |= (1 << UPM01);
+        case 2:
+            /* Odd parity */
+            ucsrc |= (1 << UPM01);
         break;
-        default: break;
+        default:
+        break;
     }
 
     UCSR0C = ucsrc;
@@ -56,6 +88,7 @@ void init_uart(uint32_t baudrate, uint8_t stop_bits, uint8_t data_bits, uint8_t 
     return;
 }
 
+/* Send char uart */
 void send_char_uart(char data) {
 
     while (!(UCSR0A & (1 << UDRE0)));
@@ -64,9 +97,10 @@ void send_char_uart(char data) {
     return;
 }
 
+/* Send string uart */
 void send_string_uart(char *data, uint8_t len_data) {
 
-    for(uint8_t i = 0; i< len_data; i++) {
+    for(uint8_t i = 0; i < len_data; i++) {
         send_char_uart(*data);
     }
 
