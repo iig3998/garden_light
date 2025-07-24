@@ -165,6 +165,7 @@ int main() {
 
     while(1) {
 
+        cli();
         if(world_ready) {
 
             /* Valid only coil registers */
@@ -178,6 +179,7 @@ int main() {
             }
             world_ready = false;
         }
+        sei();
 
         _delay_ms(10);
     }
