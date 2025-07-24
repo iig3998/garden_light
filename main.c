@@ -7,6 +7,7 @@
 
 #include "gpio.h"
 #include "uart.h"
+#include "timer1.h"
 #include "modbus.h"
 
 #define SIZE_MODBUS_MESSAGE 10
@@ -44,6 +45,7 @@ ISR(USART_RX_vect) {
     cli();
 
     /* Stop timer */
+    timer1_stop();
 
     if (idx_count <= SIZE_MODBUS_MESSAGE){
         modbus_msg[idx_count++] = UDR0;
@@ -52,6 +54,10 @@ ISR(USART_RX_vect) {
     }
 
     /* Restart timer */
+    timer1_reset_counter();
+
+    /* Restart timer */
+    timer1_start();
 
     sei();
 
