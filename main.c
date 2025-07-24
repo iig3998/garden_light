@@ -49,8 +49,9 @@ ISR(USART_RX_vect) {
 
     if (idx_count <= SIZE_MODBUS_MESSAGE){
         modbus_msg[idx_count++] = UDR0;
-
-        /* Restart timer */
+    } else {
+        memset(modbus_msg, 0, sizeof(modbus_msg));
+        idx_count = 0;
     }
 
     /* Restart timer */
