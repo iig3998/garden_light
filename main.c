@@ -179,7 +179,7 @@ int main() {
             world_ready = false;
         }
 
-        _delay_ms(5);
+        _delay_ms(10);
     }
 
     return 0;
