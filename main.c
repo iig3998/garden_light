@@ -136,6 +136,12 @@ int main() {
     /* Read modbus address slave */
     address_slave = read_address_slave();
 
+    /* Stop timer1 */
+    timer1_stop();
+
+    /* Reset counter timer1 */
+    timer1_reset_counter();
+
     /* Enable gloabl interrupt */
     sei();
 
